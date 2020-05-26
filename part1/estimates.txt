@@ -1,0 +1,13 @@
+Minimum RTO for a single AZ outage:
+RDS instance failure occurs when the underlying EC2 instance suffers a failure. In the case of AZ disruption new instance can be created in new AZ, using point in time recovery. Minimum RTO would be the time it takes to start up a new rds instance and then apply all the changes since the last backup. Incase of MultiAZ enabled it is equal to the time it takes for CNAME switching as it also takes TTL into account. Minimum RTO would estimate 60 - 120 seconds.
+
+Minimum RTO for a single region outage:
+In the case of Single region outage, RTO depends on many factors such as the size of DB instance, the distance between two regions. For example, to promote read replica it takes 10 mins to finish for a volume of 100 GB.
+
+Minimum RPO for a single AZ outage:
+If AZ failure is more permanent the instance will be set to a failed state(mostly in the rare case). If AZ failure is a temporary database will be down but remains in the available state. The RPO would be the time the AZ failure occurred.
+
+Minimum RPO for a single region outage:
+It depends on how frequent we are taking the backup. For example, 5 minutes, according to RDS backup interval but it also results in high cost. 
+
+

@@ -1,0 +1,50 @@
+[root@ip-10-1-10-82 ec2-user]# mysql -h primarydb.ckwxhifym8k6.ap-southeast-1.rds.amazonaws.com -uadmin -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 32
+Server version: 8.0.17 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| udacity            |
++--------------------+
+4 rows in set (0.00 sec)
+
+MySQL [(none)]> use udacity;
+Database changed
+MySQL [udacity]> CREATE TABLE Persons (
+    ->     PersonID int,
+    ->     LastName varchar(255),
+    ->     FirstName varchar(255),
+    ->     Address varchar(255),
+    ->     City varchar(255)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+MySQL [udacity]> INSERT INTO persons VALUES (123,'Pawar','Prasanna','singapore','SG');
+ERROR 1146 (42S02): Table 'udacity.persons' doesn't exist
+MySQL [udacity]> INSERT INTO Persons VALUES (123,'Pawar','Prasanna','singapore','SG');
+Query OK, 1 row affected (0.01 sec)
+
+MySQL [udacity]> INSERT INTO Persons VALUES (456,'Wick','John','USA','CA');
+Query OK, 1 row affected (0.02 sec)
+
+MySQL [udacity]> select * from Persons;
++----------+----------+-----------+-----------+------+
+| PersonID | LastName | FirstName | Address   | City |
++----------+----------+-----------+-----------+------+
+|      123 | Pawar    | Prasanna  | singapore | SG   |
+|      456 | Wick     | John      | USA       | CA   |
++----------+----------+-----------+-----------+------+
+2 rows in set (0.00 sec)
+
+MySQL [udacity]>
